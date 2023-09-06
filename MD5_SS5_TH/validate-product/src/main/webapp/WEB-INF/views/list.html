@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>List Product</title>
+</head>
+<a href="/add"> Add new product</a>
+<form action="/search">
+  <input type="text" name="keyword">
+  <button type="submit" >Search</button>
+</form>
+<table border="10" cellpadding="20" cellspacing="10">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Price</th>
+
+  </tr>
+  <tr th:each="p:${products}">
+    <td th:text="${p.id}"></td>
+    <td th:text="${p.name}"></td>
+    <td th:text="${p.price}"></td>
+  </tr>
+</table>
+<div>
+    <a th:href="@{'/'(page=${products.number - 1})}" th:if="${products.hasPrevious()}">Previous</a>
+    <span th:text="|${products.number+1}/${products.totalPages}|"></span>
+    <a th:href="@{'/'(page=${products.number + 1})}" th:if="${products.hasNext()}">Next</a>
+
+</div>
+</html>
